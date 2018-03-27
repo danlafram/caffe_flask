@@ -1,4 +1,4 @@
-import os, classifier, datetime
+import os, datetime
 from flask import Flask, render_template, request
 from forms import ImageForm
 from PIL import Image
@@ -14,8 +14,11 @@ UPLOAD_FOLDER = BASE_DIR + "/uploads/"
 app = Flask(__name__)
 app.debug = True
 
+@app.route('/hello')
+def hello():
+	print('hello world')
 
-app.route("/", methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
   form = ImageForm()
   if request.method == 'POST':
@@ -38,8 +41,9 @@ def home():
 
     return render_template('show.html', classifications=classifications)
   else:
-    return render_template('home.html')
+  	return 'Hello World'
+    # return render_template('home.html')
 
 if __name__== "__main__":
-        app.run(host="0.0.0.0")
+        app.run()
 
